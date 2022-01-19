@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Test",
-    "slug": "Test",
+    "name": "Namz",
+    "slug": "namaz",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,10 +23,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.umairhussain.namaz"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
