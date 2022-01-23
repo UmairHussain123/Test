@@ -3,8 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { List, ActivityIndicator } from "react-native-paper";
-import Constants from "expo-constants";
-import * as Location from "expo-location";
 export default function App() {
   const [city, setcity] = useState("Karachi");
   const [country, setCountry] = useState("PAK");
@@ -52,15 +50,8 @@ export default function App() {
   });
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-
   useEffect(() => {
-    (async () => {
-      if (Platform.OS === "android" && !Constants.isDevice) {
-        setErrorMsg(
-          "Oops, this will not work on Snack in an Android emulator. Try it on your device!"
-        );
-        return;
-      }
+    const loc = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
@@ -69,14 +60,16 @@ export default function App() {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-    })();
+      // console.log(location);
+    };
+
+    loc();
   }, []);
   let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-    console.log(text);
   }
   return (
     <View style={styles.container}>
